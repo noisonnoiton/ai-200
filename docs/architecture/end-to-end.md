@@ -3,7 +3,7 @@
 AI-200의 서비스는 서로 독립된 목록이 아닙니다. 아래 reference flow는 네 domain을 하나의 production AI application으로 연결합니다.
 
 !!! tip "Interactive architecture"
-  [전체 화면에서 AI-200 architecture 탐색하기](ai-200-end-to-end.html){ target="_blank" }
+    [전체 화면에서 AI-200 architecture 탐색하기](ai-200-end-to-end.html){ target="_blank" }
 
   Theme 전환, zoom, component 검색, 관계 추적, presentation mode와 image export를 사용할 수 있습니다.
 
