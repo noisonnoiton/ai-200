@@ -61,6 +61,7 @@ markdown_extensions:
 nav:
   - 소개:
       - Overview: index.md
+      - AZ-204에서 AI-200으로: overview/az-204-to-ai-200.md
       - 시험 정보: exam/overview.md
       - 하루 세미나: seminar/day-plan.md
       - End-to-end architecture: architecture/end-to-end.md
