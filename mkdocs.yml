@@ -1,0 +1,91 @@
+site_name: AI-200 Azure AI Cloud Developer
+site_description: AI-200 Developing AI Cloud Solutions on Azure 하루 세미나 자료
+site_url: https://noisonnoiton.github.io/ai-200/
+
+repo_url: https://github.com/noisonnoiton/ai-200
+edit_uri: ""
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: ko
+  font:
+    text: Noto Sans KR
+    code: JetBrains Mono
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: 다크 모드로 전환
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: 라이트 모드로 전환
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - header.autohide
+    - content.code.copy
+    - content.tooltips
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - plantuml_markdown:
+      server: https://www.plantuml.com/plantuml
+      format: svg
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - 소개:
+      - Overview: index.md
+      - 시험 정보: exam/overview.md
+      - 하루 세미나: seminar/day-plan.md
+      - End-to-end architecture: architecture/end-to-end.md
+  - "Domain 1 · Containers":
+      - Overview: domain1-containers/index.md
+      - Container hosting과 orchestration: domain1-containers/01-platforms.md
+  - "Domain 2 · AI Data":
+      - Overview: domain2-ai-data/index.md
+      - Vector data와 RAG: domain2-ai-data/01-vector-data.md
+  - "Domain 3 · Integration":
+      - Overview: domain3-integration/index.md
+      - Messaging, events, Functions: domain3-integration/01-events-functions.md
+  - "Domain 4 · Operations":
+      - Overview: domain4-operations/index.md
+      - Security와 observability: domain4-operations/01-security-observability.md
+  - 참고:
+      - 용어집: glossary.md
+
+plugins:
+  - search
+  - privacy:
+      assets: false
+      links_attr_map:
+        target: _blank
+      links_noopener: true
+
+extra_css:
+  - stylesheets/custom-colors.css

@@ -1,0 +1,34 @@
+/* Azure-inspired cyan and navy palette for AI-200. */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #005a9e;
+  --md-primary-fg-color--light: #0078d4;
+  --md-primary-fg-color--dark: #003b66;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.7);
+  --md-accent-fg-color: #007c91;
+  --md-accent-fg-color--transparent: rgba(0, 124, 145, 0.1);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 205;
+  --md-accent-fg-color: #4dd0e1;
+  --md-accent-fg-color--transparent: rgba(77, 208, 225, 0.1);
+}
+
+/* Keep architecture labels readable instead of shrinking wide SVGs on mobile. */
+.md-typeset p:has(> img.uml) {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--md-default-bg-color) 94%, #0078d4 6%);
+  border: 1px solid color-mix(in srgb, var(--md-default-fg-color) 16%, transparent);
+  border-radius: 0.4rem;
+}
+
+.md-typeset img.uml {
+  display: block;
+  min-width: 40rem;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}

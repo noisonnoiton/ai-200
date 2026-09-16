@@ -1,0 +1,16 @@
+[project]
+name = "ai-200"
+version = "0.1.0"
+description = "AI-200 Developing AI Cloud Solutions on Azure 세미나 자료"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs-material>=9.5,<10",
+  "plantuml-markdown>=3.10",
+]
+
+[tool.uv]
+package = false
+index-url = "https://pypi.org/simple"
