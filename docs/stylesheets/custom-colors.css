@@ -15,11 +15,10 @@
   --md-accent-fg-color--transparent: rgba(77, 208, 225, 0.1);
 }
 
-/* Keep architecture labels readable instead of shrinking wide SVGs on mobile. */
+/* Keep rendered diagrams inside the reading width at every viewport size. */
 .md-typeset p:has(> img.uml) {
   margin: 1.5rem 0;
   padding: 1rem;
-  overflow-x: auto;
   background: color-mix(in srgb, var(--md-default-bg-color) 94%, #0078d4 6%);
   border: 1px solid color-mix(in srgb, var(--md-default-fg-color) 16%, transparent);
   border-radius: 0.4rem;
@@ -27,7 +26,6 @@
 
 .md-typeset img.uml {
   display: block;
-  min-width: 40rem;
   max-width: 100%;
   height: auto;
   margin: 0 auto;
