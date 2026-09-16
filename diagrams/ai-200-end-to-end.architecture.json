@@ -8,14 +8,13 @@
       "url": "https://github.com/noisonnoiton/ai-200.git",
       "revision": "3ef2744e42eeac1c3a411bc12cf1e2042cf814fa"
     },
-    "viewBox": [1440, 790]
+    "viewBox": [1380, 790]
   },
   "components": [
     {
       "id": "client",
       "type": "external",
       "label": "Client",
-      "sublabel": "HTTP request",
       "pos": [36, 330],
       "size": [120, 64],
       "sources": [{ "path": "docs/architecture/end-to-end.md", "line": 22, "label": "reference flow" }]
@@ -25,7 +24,7 @@
       "type": "cloud",
       "label": "Container Registry",
       "sublabel": "ACR Tasks + images",
-      "pos": [220, 80],
+      "pos": [237, 105],
       "size": [150, 68],
       "sources": [{ "path": "docs/architecture/end-to-end.md", "line": 72, "label": "build automation" }]
     },
@@ -65,7 +64,7 @@
       "label": "Key Vault",
       "sublabel": "secrets + rotation",
       "tag": "Domain 4",
-      "pos": [470, 80],
+      "pos": [470, 555],
       "size": [142, 68],
       "sources": [{ "path": "docs/architecture/end-to-end.md", "line": 40, "label": "platform controls" }]
     },
@@ -75,7 +74,7 @@
       "label": "App Configuration",
       "sublabel": "runtime settings",
       "tag": "Domain 4",
-      "pos": [700, 80],
+      "pos": [700, 555],
       "size": [158, 68],
       "sources": [{ "path": "docs/architecture/end-to-end.md", "line": 41, "label": "platform controls" }]
     },
@@ -115,7 +114,7 @@
       "label": "Azure Monitor",
       "sublabel": "OpenTelemetry + KQL",
       "tag": "Domain 4",
-      "pos": [1240, 330],
+      "pos": [1215, 650],
       "size": [158, 72],
       "sources": [{ "path": "docs/architecture/end-to-end.md", "line": 42, "label": "platform controls" }]
     }
@@ -123,8 +122,8 @@
   "boundaries": [
     {
       "kind": "region",
-      "label": "Build and platform controls",
-      "wraps": ["registry", "key_vault", "app_config"],
+      "label": "Build",
+      "wraps": ["registry"],
       "pad": 20
     },
     {
@@ -138,53 +137,51 @@
       "label": "AI data and inference",
       "wraps": ["data_store", "redis", "model"],
       "pad": 22
+    },
+    {
+      "kind": "security-group",
+      "label": "Platform controls",
+      "wraps": ["key_vault", "app_config"],
+      "pad": 20
     }
   ],
   "connections": [
-    { "id": "request", "from": "client", "to": "api", "label": "1 · HTTPS request", "variant": "emphasis" },
-    { "id": "enqueue", "from": "api", "to": "service_bus", "label": "2 · enqueue long-running work", "variant": "emphasis" },
-    { "id": "deliver", "from": "service_bus", "to": "worker", "label": "3 · reliable delivery", "variant": "emphasis" },
-    { "id": "retrieve", "from": "worker", "to": "data_store", "label": "4 · vector + metadata retrieval" },
-    { "id": "cache", "from": "worker", "to": "redis", "label": "cache / low-latency lookup" },
-    { "id": "ground", "from": "worker", "to": "model", "label": "5 · grounded prompt", "variant": "emphasis" },
-    { "id": "answer", "from": "model", "to": "worker", "label": "6 · generated response", "variant": "emphasis" },
-    { "id": "result", "from": "worker", "to": "api", "label": "7 · result", "variant": "emphasis" },
-    { "id": "build_api", "from": "registry", "to": "api", "label": "deploy versioned image", "variant": "dashed" },
-    { "id": "build_worker", "from": "registry", "to": "worker", "label": "deploy versioned image", "variant": "dashed" },
-    { "id": "api_secret", "from": "key_vault", "to": "api", "label": "managed identity retrieves secret", "variant": "security" },
-    { "id": "worker_secret", "from": "key_vault", "to": "worker", "label": "managed identity retrieves secret", "variant": "security" },
-    { "id": "runtime_config", "from": "app_config", "to": "api", "label": "non-secret settings", "variant": "security" },
-    { "id": "api_telemetry", "from": "api", "to": "monitor", "label": "traces + metrics", "variant": "dashed" },
-    { "id": "bus_telemetry", "from": "service_bus", "to": "monitor", "label": "delivery health", "variant": "dashed" },
-    { "id": "worker_telemetry", "from": "worker", "to": "monitor", "label": "spans + logs", "variant": "dashed" },
-    { "id": "data_telemetry", "from": "data_store", "to": "monitor", "label": "latency + RU / query metrics", "variant": "dashed" }
+    { "id": "request", "from": "client", "to": "api", "variant": "emphasis" },
+    { "id": "enqueue", "from": "api", "to": "service_bus", "label": "2 · enqueue work", "labelDy": -30, "variant": "emphasis" },
+    { "id": "deliver", "from": "service_bus", "to": "worker", "label": "3 · reliable delivery", "labelDy": -30, "variant": "emphasis" },
+    { "id": "retrieve", "from": "worker", "to": "data_store", "label": "4 · retrieve context", "labelAt": [920, 270] },
+    { "id": "cache", "from": "worker", "to": "redis" },
+    { "id": "model_roundtrip", "from": "worker", "to": "model", "label": "5–6 · grounded model round trip", "labelAt": [920, 471], "variant": "emphasis" },
+    { "id": "build_api", "from": "registry", "to": "api", "label": "versioned image", "labelAt": [312, 187], "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
+    { "id": "build_worker", "from": "registry", "to": "worker", "variant": "dashed", "fromSide": "right", "toSide": "top" },
+    { "id": "api_secret", "from": "key_vault", "to": "api", "label": "secret", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "worker_secret", "from": "key_vault", "to": "worker", "variant": "security", "fromSide": "right", "toSide": "bottom" },
+    { "id": "runtime_config", "from": "app_config", "to": "worker", "label": "settings", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "telemetry", "from": "worker", "to": "monitor", "label": "traces · metrics · logs", "labelAt": [1120, 620], "variant": "dashed", "fromSide": "bottom", "toSide": "left" }
   ],
   "cards": [
     {
       "dot": "cyan",
-      "title": "Request lifecycle",
+      "title": "요청 처리 흐름",
       "items": [
-        "Keep synchronous API work short and enqueue long-running AI jobs.",
-        "Use durable delivery and design consumers for retries and idempotency.",
-        "Retrieve evidence before sending a grounded prompt to the model."
+        "API 작업은 짧게 유지하고, 장시간 작업은 durable하고 idempotent한 방식으로 queue에 넣습니다.",
+        "Model에 grounded prompt를 보내기 전에 근거 자료를 검색합니다."
       ]
     },
     {
       "dot": "emerald",
-      "title": "Data choices",
+      "title": "Data 선택",
       "items": [
-        "Cosmos DB: distributed operational JSON and vector search.",
-        "PostgreSQL: relational data, SQL, metadata filters, and pgvector.",
-        "Managed Redis: low-latency cache, semantic cache, or vector index."
+        "분산 JSON에는 Cosmos DB를, relational data와 pgvector에는 PostgreSQL을 선택합니다.",
+        "Managed Redis는 low-latency cache, semantic cache, vector index에 적합합니다."
       ]
     },
     {
       "dot": "rose",
-      "title": "Production controls",
+      "title": "운영 제어",
       "items": [
-        "Images are versioned in ACR; secrets stay in Key Vault.",
-        "App Configuration stores non-secret runtime settings.",
-        "OpenTelemetry context connects API, messaging, worker, data, and model evidence."
+        "HTTPS를 사용하고 image는 ACR에서 version 관리하며 secret은 Key Vault에 보관합니다.",
+        "App Configuration은 setting을 저장하고 OpenTelemetry는 운영 증거를 연결합니다."
       ]
     }
   ]

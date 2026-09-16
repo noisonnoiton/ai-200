@@ -6,3 +6,4 @@
 *.bak
 *.swp
 *.swo
+docs/architecture/*.visual-check.*
