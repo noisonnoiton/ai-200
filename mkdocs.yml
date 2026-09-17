@@ -77,8 +77,9 @@ nav:
   - "Domain 4 · Operations":
       - Overview: domain4-operations/index.md
       - Security와 observability: domain4-operations/01-security-observability.md
-  - Custom 실습:
-      - AB-730 Agent 모니터링: custom-labs/ab730-agent-monitoring.md
+  - Custom Labs:
+      - AB-730 Agent Lab: custom-labs/ab730-agent-lab.md
+      - '[참고] Monitoring 실습': custom-labs/ab730-agent-monitoring.md
   - 참고:
       - 용어집: glossary.md
 

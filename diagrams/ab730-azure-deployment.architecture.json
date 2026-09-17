@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AB-730 Azure 배포 구조",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "viewBox": [1380, 790],
+    "views": [
+      {
+        "id": "delivery",
+        "label": "CI/CD 배포",
+        "focus": ["developer", "github_actions", "ghcr", "tf_state", "aca"],
+        "note": "main push에서 SHA image build와 Terraform apply까지 이어지는 경로입니다."
+      },
+      {
+        "id": "runtime",
+        "label": "Agent runtime",
+        "focus": ["learner", "aca", "identity", "learn_mcp", "foundry"],
+        "note": "로그인한 사용자의 요청이 keyless inference와 Learn grounding으로 이어집니다."
+      },
+      {
+        "id": "operations",
+        "label": "Observability",
+        "focus": ["aca", "foundry", "app_insights", "log_analytics"],
+        "note": "Application telemetry와 ACA 및 Foundry diagnostic log가 하나의 workspace에서 query됩니다."
+      }
+    ]
+  },
+  "components": [
+    { "id": "developer", "type": "external", "label": "Developer", "sublabel": "push to main", "pos": [35, 105], "size": [130, 64] },
+    { "id": "github_actions", "type": "backend", "label": "GitHub Actions", "sublabel": "build + Terraform", "pos": [245, 105], "size": [150, 68] },
+    { "id": "ghcr", "type": "cloud", "label": "GitHub Container Registry", "sublabel": "commit SHA image", "pos": [500, 105], "size": [178, 68] },
+    { "id": "tf_state", "type": "database", "label": "Terraform State", "sublabel": "Azure Blob", "pos": [35, 230], "size": [150, 68] },
+    { "id": "learner", "type": "external", "label": "Learner", "sublabel": "browser", "pos": [35, 420], "size": [130, 64] },
+    { "id": "aca", "type": "backend", "label": "Azure Container App", "sublabel": "Next.js + LangGraph", "pos": [300, 410], "size": [174, 76], "tag": "ab730" },
+    { "id": "learn_mcp", "type": "external", "label": "Microsoft Learn MCP", "sublabel": "official grounding", "pos": [610, 310], "size": [170, 68] },
+    { "id": "identity", "type": "security", "label": "User-assigned Identity", "sublabel": "OpenAI User RBAC", "pos": [610, 510], "size": [170, 68], "tag": "keyless" },
+    { "id": "foundry", "type": "cloud", "label": "Microsoft Foundry", "sublabel": "gpt-5.6-luna-01", "pos": [940, 410], "size": [170, 72] },
+    { "id": "app_insights", "type": "cloud", "label": "Application Insights", "sublabel": "app telemetry", "pos": [350, 675], "size": [170, 68] },
+    { "id": "log_analytics", "type": "database", "label": "Log Analytics", "sublabel": "workspace + KQL", "pos": [800, 675], "size": [160, 68] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "GitHub", "wraps": ["github_actions", "ghcr"], "pad": 20 },
+    { "kind": "region", "label": "Azure Korea Central", "wraps": ["tf_state", "aca", "identity", "app_insights", "log_analytics"], "pad": 22 },
+    { "kind": "security-group", "label": "Managed identity trust", "wraps": ["aca", "identity"], "pad": 18 },
+    { "kind": "region", "label": "Existing Microsoft Foundry resource", "wraps": ["foundry"], "pad": 18 }
+  ],
+  "connections": [
+    { "id": "push", "from": "developer", "to": "github_actions", "label": "push", "variant": "emphasis" },
+    { "id": "publish", "from": "github_actions", "to": "ghcr", "label": "SHA image", "variant": "emphasis" },
+    { "id": "state", "from": "github_actions", "to": "tf_state", "label": "state", "variant": "dashed" },
+    { "id": "deploy", "from": "github_actions", "to": "aca", "label": "Terraform apply", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "pull", "from": "ghcr", "to": "aca", "label": "image pull", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "https", "from": "learner", "to": "aca", "label": "HTTPS · Ask AI", "variant": "emphasis" },
+    { "id": "learn", "from": "aca", "to": "learn_mcp", "label": "MCP search", "variant": "emphasis", "labelAt": [545, 330] },
+    { "id": "attach_identity", "from": "aca", "to": "identity", "label": "AZURE_CLIENT_ID", "variant": "security" },
+    { "id": "inference", "from": "aca", "to": "foundry", "label": "keyless inference", "variant": "security", "labelAt": [705, 468] },
+    { "id": "rbac", "from": "identity", "to": "foundry", "label": "OpenAI User RBAC", "variant": "security" },
+    { "id": "otel", "from": "aca", "to": "app_insights", "label": "OpenTelemetry: app telemetry", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "labelAt": [280, 530] },
+    { "id": "workspace", "from": "app_insights", "to": "log_analytics", "label": "workspace-based store", "variant": "dashed" },
+    { "id": "aca_diagnostics", "from": "aca", "to": "log_analytics", "label": "ACA diagnostics: console · system · HTTP", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "labelAt": [634, 592] },
+    { "id": "foundry_diagnostics", "from": "foundry", "to": "log_analytics", "label": "Foundry diagnostics: usage · audit · trace", "variant": "dashed", "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "배포 경계",
+      "items": [
+        "GitHub Actions는 commit SHA image를 GHCR에 게시하고 Terraform으로 ACA revision을 갱신합니다.",
+        "Terraform state는 Azure Blob에 저장해 local과 CI가 같은 resource ownership을 공유합니다."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Runtime 보안",
+      "items": [
+        "ACA는 user-assigned managed identity로 Foundry token을 발급받습니다.",
+        "Production container에는 Foundry API key를 저장하지 않습니다."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "운영 Evidence",
+      "items": [
+        "App telemetry: Application Insights -> linked Log Analytics workspace.",
+        "Diagnostics: ACA and Foundry -> Log Analytics. Prompt and answer bodies excluded."
+      ]
+    }
+  ]
+}

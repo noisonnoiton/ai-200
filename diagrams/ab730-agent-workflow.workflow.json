@@ -1,0 +1,92 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "AB-730 학습 Agent 실행 흐름",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "legend": { "mode": "hidden" },
+    "views": [
+      {
+        "id": "request-flow",
+        "label": "질문에서 답변까지",
+        "focus": ["ask", "load", "vision", "learn_search", "compose", "verify"],
+        "note": "문제 조회부터 citation 검증까지의 순차 실행을 확인합니다."
+      },
+      {
+        "id": "grounding-flow",
+        "label": "Grounding과 citation",
+        "focus": ["vision", "learn_search", "learn_mcp", "compose", "verify"],
+        "note": "이미지 분석에서 추출한 검색어가 Learn grounding과 citation 검증으로 이어집니다."
+      },
+      {
+        "id": "telemetry-flow",
+        "label": "운영 evidence",
+        "focus": ["learn_search", "compose", "telemetry"],
+        "note": "검색 latency, source 수, model token과 failure event를 기록합니다."
+      }
+    ]
+  },
+  "lanes": [
+    { "id": "experience", "label": "사용자 경험" },
+    { "id": "agent", "label": "LangGraph Agent" },
+    { "id": "services", "label": "외부 AI와 Tool" },
+    { "id": "operations", "label": "운영 Evidence" }
+  ],
+  "phases": [
+    { "id": "intake", "label": "요청과 context", "fromCol": 0, "toCol": 2 },
+    { "id": "grounding", "label": "검색과 생성", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "delivery", "label": "검증과 응답", "fromCol": 5, "toCol": 5, "variant": "security" }
+  ],
+  "mainPath": ["ask", "load", "vision", "learn_search", "compose", "verify", "telemetry"],
+  "semanticChecks": {
+    "allowedRoots": ["ask"],
+    "allowedTerminals": ["telemetry"],
+    "requiredPaths": [
+      { "from": "ask", "to": "verify" },
+      { "from": "vision", "to": "learn_mcp" },
+      { "from": "compose", "to": "telemetry" }
+    ]
+  },
+  "nodes": [
+    { "id": "ask", "lane": "experience", "col": 0, "type": "frontend", "label": "Ask AI", "width": 136 },
+    { "id": "load", "lane": "agent", "col": 1, "type": "backend", "label": "문제/image 조회", "width": 136 },
+    { "id": "vision", "lane": "agent", "col": 2, "type": "backend", "label": "이미지 분석", "tag": "image only", "width": 148 },
+    { "id": "learn_search", "lane": "agent", "col": 3, "type": "messagebus", "label": "Learn 근거 검색", "width": 136 },
+    { "id": "compose", "lane": "agent", "col": 4, "type": "backend", "label": "근거 기반 답변", "width": 136 },
+    { "id": "verify", "lane": "experience", "col": 5, "type": "security", "label": "Citation URL 검증", "width": 148 },
+    { "id": "learn_mcp", "lane": "services", "col": 3, "type": "external", "label": "Microsoft Learn MCP", "width": 156 },
+    { "id": "foundry", "lane": "services", "col": 4, "type": "cloud", "label": "Microsoft Foundry", "width": 148 },
+    { "id": "telemetry", "lane": "operations", "col": 5, "type": "database", "label": "Structured telemetry", "width": 156 }
+  ],
+  "edges": [
+    { "id": "ask-load", "from": "ask", "to": "load", "label": "POST /api/ai-answer", "variant": "emphasis" },
+    { "id": "load-vision", "from": "load", "to": "vision", "label": "question + local image" },
+    { "id": "vision-search", "from": "vision", "to": "learn_search", "label": "search terms", "variant": "emphasis" },
+    { "id": "search-compose", "from": "learn_search", "to": "compose", "label": "Learn evidence", "variant": "emphasis" },
+    { "id": "compose-verify", "from": "compose", "to": "verify", "label": "answer + URLs", "variant": "security" },
+    { "id": "search-mcp", "from": "learn_search", "to": "learn_mcp", "label": "microsoft_docs_search", "role": "async" },
+    { "id": "mcp-search-return", "from": "learn_mcp", "to": "learn_search", "label": "official sources", "variant": "dashed", "role": "return" },
+    { "id": "compose-foundry", "from": "compose", "to": "foundry", "label": "images + evidence -> structured JSON", "role": "async" },
+    { "id": "foundry-compose-return", "from": "foundry", "to": "compose", "label": "model response", "variant": "dashed", "role": "return" },
+    { "id": "verify-telemetry", "from": "verify", "to": "telemetry", "label": "latency · source · token · failure", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Grounded Answer",
+      "items": [
+        "이미지 분석은 제품명, 기능명, visible text를 Learn 검색어로 추출하는 image-only node입니다.",
+        "최종 citation은 MCP 검색 결과 URL과 정확히 일치할 때만 노출합니다."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Privacy Boundary",
+      "items": [
+        "Client는 question sequence만 전송하고 server가 원본 문제를 조회합니다.",
+        "질문과 답변 본문은 운영 event에 기록하지 않습니다."
+      ]
+    }
+  ]
+}

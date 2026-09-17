@@ -30,3 +30,26 @@
   height: auto;
   margin: 0 auto;
 }
+
+.md-typeset .archify-frame {
+  display: block;
+  width: 100%;
+  height: min(78vh, 860px);
+  min-height: 620px;
+  margin: 1rem 0 2rem;
+  border: 1px solid color-mix(in srgb, var(--md-default-fg-color) 16%, transparent);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset .archify-frame--deployment {
+  min-height: 700px;
+}
+
+@media (max-width: 720px) {
+  .md-typeset .archify-frame,
+  .md-typeset .archify-frame--deployment {
+    height: 72vh;
+    min-height: 540px;
+  }
+}
