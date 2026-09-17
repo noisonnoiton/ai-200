@@ -16,8 +16,8 @@
       {
         "id": "runtime",
         "label": "Agent runtime",
-        "focus": ["learner", "aca", "identity", "learn_mcp", "foundry"],
-        "note": "로그인한 사용자의 요청이 keyless inference와 Learn grounding으로 이어집니다."
+        "focus": ["learner", "github_oauth", "aca", "identity", "learn_mcp", "foundry"],
+        "note": "GitHub OAuth repository access 검증 후 사용자의 요청이 keyless inference와 Learn grounding으로 이어집니다."
       },
       {
         "id": "operations",
@@ -32,6 +32,7 @@
     { "id": "github_actions", "type": "backend", "label": "GitHub Actions", "sublabel": "build + Terraform", "pos": [245, 105], "size": [150, 68] },
     { "id": "ghcr", "type": "cloud", "label": "GitHub Container Registry", "sublabel": "commit SHA image", "pos": [500, 105], "size": [178, 68] },
     { "id": "tf_state", "type": "database", "label": "Terraform State", "sublabel": "Azure Blob", "pos": [35, 230], "size": [150, 68] },
+    { "id": "github_oauth", "type": "external", "label": "GitHub OAuth", "sublabel": "Auth.js provider", "pos": [35, 320], "size": [160, 68] },
     { "id": "learner", "type": "external", "label": "Learner", "sublabel": "browser", "pos": [35, 420], "size": [130, 64] },
     { "id": "aca", "type": "backend", "label": "Azure Container App", "sublabel": "Next.js + LangGraph", "pos": [300, 410], "size": [174, 76], "tag": "ab730" },
     { "id": "learn_mcp", "type": "external", "label": "Microsoft Learn MCP", "sublabel": "official grounding", "pos": [610, 310], "size": [170, 68] },
@@ -41,7 +42,7 @@
     { "id": "log_analytics", "type": "database", "label": "Log Analytics", "sublabel": "workspace + KQL", "pos": [800, 675], "size": [160, 68] }
   ],
   "boundaries": [
-    { "kind": "region", "label": "GitHub", "wraps": ["github_actions", "ghcr"], "pad": 20 },
+    { "kind": "region", "label": "GitHub CI/CD", "wraps": ["github_actions", "ghcr"], "pad": 20 },
     { "kind": "region", "label": "Azure Korea Central", "wraps": ["tf_state", "aca", "identity", "app_insights", "log_analytics"], "pad": 22 },
     { "kind": "security-group", "label": "Managed identity trust", "wraps": ["aca", "identity"], "pad": 18 },
     { "kind": "region", "label": "Existing Microsoft Foundry resource", "wraps": ["foundry"], "pad": 18 }
@@ -52,7 +53,9 @@
     { "id": "state", "from": "github_actions", "to": "tf_state", "label": "state", "variant": "dashed" },
     { "id": "deploy", "from": "github_actions", "to": "aca", "label": "Terraform apply", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
     { "id": "pull", "from": "ghcr", "to": "aca", "label": "image pull", "variant": "security", "fromSide": "bottom", "toSide": "top" },
-    { "id": "https", "from": "learner", "to": "aca", "label": "HTTPS · Ask AI", "variant": "emphasis" },
+    { "id": "https", "from": "learner", "to": "aca", "label": "HTTPS · Ask AI", "variant": "emphasis", "labelAt": [235, 480] },
+    { "id": "oauth_redirect", "from": "learner", "to": "github_oauth", "label": "OAuth sign-in", "variant": "security", "fromSide": "top", "toSide": "bottom", "labelAt": [116, 310] },
+    { "id": "oauth_callback", "from": "github_oauth", "to": "aca", "label": "OAuth callback + repo check", "variant": "security", "fromSide": "right", "toSide": "left", "labelAt": [275, 352] },
     { "id": "learn", "from": "aca", "to": "learn_mcp", "label": "MCP search", "variant": "emphasis", "labelAt": [545, 330] },
     { "id": "attach_identity", "from": "aca", "to": "identity", "label": "AZURE_CLIENT_ID", "variant": "security" },
     { "id": "inference", "from": "aca", "to": "foundry", "label": "keyless inference", "variant": "security", "labelAt": [705, 468] },
@@ -67,16 +70,16 @@
       "dot": "cyan",
       "title": "배포 경계",
       "items": [
-        "GitHub Actions는 commit SHA image를 GHCR에 게시하고 Terraform으로 ACA revision을 갱신합니다.",
-        "Terraform state는 Azure Blob에 저장해 local과 CI가 같은 resource ownership을 공유합니다."
+        "GitHub Actions: SHA image -> GHCR -> ACA. Azure alternative: ACR.",
+        "Terraform state: Azure Blob."
       ]
     },
     {
       "dot": "emerald",
       "title": "Runtime 보안",
       "items": [
-        "ACA는 user-assigned managed identity로 Foundry token을 발급받습니다.",
-        "Production container에는 Foundry API key를 저장하지 않습니다."
+        "GitHub OAuth: callback + repo check. Azure alternative: Entra ID.",
+        "User-assigned identity -> Foundry token. No production API key."
       ]
     },
     {

@@ -50,7 +50,9 @@ Image 문제에서는 image analysis 호출이 한 번 추가되므로 latency�
 
 - GitHub Actions는 image build와 Terraform apply를 분리하고 Azure Blob의 remote state를 사용합니다.
 - Azure Container App은 scale-to-zero가 가능한 Consumption environment에서 단일 active revision으로 실행됩니다.
+- Auth.js는 GitHub OAuth sign-in callback 후 `repo` scope token으로 `ALLOWED_REPO` 접근을 확인합니다. GitHub OAuth는 Microsoft Entra ID provider로 대체할 수 있습니다.
 - Private GHCR image는 Container App secret으로 pull하며 Foundry inference에는 API key를 사용하지 않습니다.
+- GHCR은 Azure Container Registry로 대체할 수 있으며, 이 경우 Container App registry authentication과 image reference를 Azure Container Registry 기준으로 변경합니다.
 - User-assigned managed identity가 `AZURE_CLIENT_ID`로 선택되고 Foundry resource의 `Cognitive Services OpenAI User` 역할을 사용합니다.
 - Microsoft Learn MCP는 ACA가 HTTPS로 호출하는 external grounding service입니다.
 - Application Insights는 `service.name=ab730` OpenTelemetry를 수집하고 ACA 및 Foundry diagnostic log는 Log Analytics workspace로 전송됩니다.
