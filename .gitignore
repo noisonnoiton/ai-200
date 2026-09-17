@@ -1,5 +1,10 @@
 /site/
 .venv/
+.env
+.env.*
+!.env.example
+*.tfvars
+*.tfvars.json
 .DS_Store
 .idea/
 *.log
