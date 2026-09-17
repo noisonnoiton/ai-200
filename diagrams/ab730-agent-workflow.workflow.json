@@ -11,7 +11,7 @@
         "id": "request-flow",
         "label": "질문에서 답변까지",
         "focus": ["ask", "load", "vision", "learn_search", "compose", "verify"],
-        "note": "문제 조회부터 citation 검증까지의 순차 실행을 확인합니다."
+        "note": "LangGraph node 1부터 5까지 순서대로 실행합니다. 검증된 결과는 browser drawer에 표시됩니다."
       },
       {
         "id": "grounding-flow",
@@ -34,9 +34,9 @@
     { "id": "operations", "label": "운영 Evidence" }
   ],
   "phases": [
-    { "id": "intake", "label": "요청과 context", "fromCol": 0, "toCol": 2 },
-    { "id": "grounding", "label": "검색과 생성", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
-    { "id": "delivery", "label": "검증과 응답", "fromCol": 5, "toCol": 5, "variant": "security" }
+    { "id": "intake", "label": "Node 1-2: 문제와 image 분석", "fromCol": 0, "toCol": 2 },
+    { "id": "grounding", "label": "Node 3-4: Learn grounding과 답변", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "delivery", "label": "Node 5: citation URL 검증", "fromCol": 5, "toCol": 5, "variant": "security" }
   ],
   "mainPath": ["ask", "load", "vision", "learn_search", "compose", "verify", "telemetry"],
   "semanticChecks": {
@@ -49,18 +49,18 @@
     ]
   },
   "nodes": [
-    { "id": "ask", "lane": "experience", "col": 0, "type": "frontend", "label": "Ask AI", "width": 136 },
-    { "id": "load", "lane": "agent", "col": 1, "type": "backend", "label": "문제/image 조회", "width": 136 },
-    { "id": "vision", "lane": "agent", "col": 2, "type": "backend", "label": "이미지 분석", "tag": "image only", "width": 148 },
-    { "id": "learn_search", "lane": "agent", "col": 3, "type": "messagebus", "label": "Learn 근거 검색", "width": 136 },
-    { "id": "compose", "lane": "agent", "col": 4, "type": "backend", "label": "근거 기반 답변", "width": 136 },
-    { "id": "verify", "lane": "experience", "col": 5, "type": "security", "label": "Citation URL 검증", "width": 148 },
-    { "id": "learn_mcp", "lane": "services", "col": 3, "type": "external", "label": "Microsoft Learn MCP", "width": 156 },
-    { "id": "foundry", "lane": "services", "col": 4, "type": "cloud", "label": "Microsoft Foundry", "width": 148 },
-    { "id": "telemetry", "lane": "operations", "col": 5, "type": "database", "label": "Structured telemetry", "width": 156 }
+    { "id": "ask", "lane": "experience", "col": 0, "type": "frontend", "label": "Ask AI", "tag": "request", "width": 136 },
+    { "id": "load", "lane": "agent", "col": 1, "type": "backend", "label": "문제/image 조회", "tag": "Node 1", "width": 136 },
+    { "id": "vision", "lane": "agent", "col": 2, "type": "backend", "label": "이미지 분석", "tag": "Node 2 · image only", "width": 148 },
+    { "id": "learn_search", "lane": "agent", "col": 3, "type": "backend", "label": "Learn 근거 검색", "tag": "Node 3", "width": 136 },
+    { "id": "compose", "lane": "agent", "col": 4, "type": "backend", "label": "근거 기반 답변", "tag": "Node 4", "width": 136 },
+    { "id": "verify", "lane": "agent", "col": 5, "type": "backend", "label": "Citation URL 검증", "tag": "Node 5", "width": 148 },
+    { "id": "learn_mcp", "lane": "services", "col": 3, "type": "external", "label": "Microsoft Learn MCP", "tag": "tool", "width": 156 },
+    { "id": "foundry", "lane": "services", "col": 4, "type": "cloud", "label": "Microsoft Foundry", "tag": "model", "width": 148 },
+    { "id": "telemetry", "lane": "operations", "col": 5, "type": "database", "label": "Structured telemetry", "tag": "observe", "width": 156 }
   ],
   "edges": [
-    { "id": "ask-load", "from": "ask", "to": "load", "label": "POST /api/ai-answer", "variant": "emphasis" },
+    { "id": "ask-load", "from": "ask", "to": "load", "label": "question sequence", "variant": "emphasis" },
     { "id": "load-vision", "from": "load", "to": "vision", "label": "question + local image" },
     { "id": "vision-search", "from": "vision", "to": "learn_search", "label": "search terms", "variant": "emphasis" },
     { "id": "search-compose", "from": "learn_search", "to": "compose", "label": "Learn evidence", "variant": "emphasis" },
@@ -69,7 +69,7 @@
     { "id": "mcp-search-return", "from": "learn_mcp", "to": "learn_search", "label": "official sources", "variant": "dashed", "role": "return" },
     { "id": "compose-foundry", "from": "compose", "to": "foundry", "label": "images + evidence -> structured JSON", "role": "async" },
     { "id": "foundry-compose-return", "from": "foundry", "to": "compose", "label": "model response", "variant": "dashed", "role": "return" },
-    { "id": "verify-telemetry", "from": "verify", "to": "telemetry", "label": "latency · source · token · failure", "variant": "dashed" }
+    { "id": "verify-telemetry", "from": "verify", "to": "telemetry", "label": "async ops metadata: latency · source · token · failure", "variant": "dashed" }
   ],
   "cards": [
     {
@@ -85,7 +85,7 @@
       "title": "Privacy Boundary",
       "items": [
         "Client는 question sequence만 전송하고 server가 원본 문제를 조회합니다.",
-        "질문과 답변 본문은 운영 event에 기록하지 않습니다."
+        "검증된 답변은 browser drawer에 표시하며 질문과 답변 본문은 운영 event에 기록하지 않습니다."
       ]
     }
   ]
