@@ -54,15 +54,21 @@
   }
 }
 
-/* A desktop-only AdFit placement below the right-hand table of contents. */
-.kakao-adfit-sidebar {
+/* A desktop-only AdFit rail to the right of the table of contents. */
+.kakao-adfit-rail {
   display: none;
 }
 
-@media screen and (min-width: 76.25em) {
-  .kakao-adfit-sidebar {
+@media screen and (min-width: 100em) {
+  .md-main__inner {
+    position: relative;
+  }
+
+  .kakao-adfit-rail {
     display: block;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 1.5rem);
     width: 160px;
-    margin: 1.5rem auto 0;
   }
 }

@@ -22,16 +22,17 @@
       <div class="md-sidebar__scrollwrap">
         <div class="md-sidebar__inner">
           {% include "partials/toc.html" %}
-          <aside class="kakao-adfit-sidebar" aria-label="광고">
-            <ins class="kakao_ad_area" style="display:none;"
-              data-ad-unit="DAN-oYnyqFed1jZhUtvA"
-              data-ad-width="160"
-              data-ad-height="600"></ins>
-          </aside>
         </div>
       </div>
     </div>
   {% endif %}
+
+  <aside class="kakao-adfit-rail" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-oYnyqFed1jZhUtvA"
+      data-ad-width="160"
+      data-ad-height="600"></ins>
+  </aside>
 {% endblock %}
 
 {% block scripts %}

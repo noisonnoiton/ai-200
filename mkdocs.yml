@@ -29,8 +29,6 @@ theme:
         icon: material/brightness-7
         name: 라이트 모드로 전환
   features:
-    - navigation.instant
-    - navigation.instant.progress
     - navigation.tabs
     - navigation.sections
     - navigation.expand
