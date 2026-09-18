@@ -1,5 +1,5 @@
 site_name: AI-200 Azure AI Cloud Developer
-site_description: AI-200 Developing AI Cloud Solutions on Azure 하루 세미나 자료
+site_description: AI-200 Developing AI Cloud Solutions on Azure 학습 자료
 site_url: https://noisonnoiton.github.io/ai-200/
 
 repo_url: https://github.com/noisonnoiton/ai-200
@@ -10,6 +10,7 @@ site_dir: site
 
 theme:
   name: material
+  custom_dir: docs/overrides
   language: ko
   font:
     text: Noto Sans KR
@@ -63,7 +64,6 @@ nav:
       - Overview: index.md
       - AZ-204에서 AI-200으로: overview/az-204-to-ai-200.md
       - 시험 정보: exam/overview.md
-      - 하루 세미나: seminar/day-plan.md
       - End-to-end architecture: architecture/end-to-end.md
   - "Domain 1 · Containers":
       - Overview: domain1-containers/index.md

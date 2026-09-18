@@ -53,3 +53,16 @@
     min-height: 540px;
   }
 }
+
+/* A desktop-only AdFit placement below the right-hand table of contents. */
+.kakao-adfit-sidebar {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
+  .kakao-adfit-sidebar {
+    display: block;
+    width: 160px;
+    margin: 1.5rem auto 0;
+  }
+}
