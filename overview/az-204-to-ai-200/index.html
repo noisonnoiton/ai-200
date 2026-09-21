@@ -1,0 +1,2168 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI-200 Developing AI Cloud Solutions on Azure 학습 자료">
+      
+      
+      
+        <link rel="canonical" href="https://noisonnoiton.github.io/ai-200/overview/az-204-to-ai-200/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../exam/overview/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AZ-204에서 AI-200으로 - AI-200 Azure AI Cloud Developer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom-colors.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#az-204-ai-200" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="AI-200 Azure AI Cloud Developer" class="md-header__button md-logo" aria-label="AI-200 Azure AI Cloud Developer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-200 Azure AI Cloud Developer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AZ-204에서 AI-200으로
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/noisonnoiton/ai-200" title="저장소로 이동" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  소개
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain1-containers/" class="md-tabs__link">
+          
+  
+  
+  Domain 1 · Containers
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain2-ai-data/" class="md-tabs__link">
+          
+  
+  
+  Domain 2 · AI Data
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain3-integration/" class="md-tabs__link">
+          
+  
+  
+  Domain 3 · Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain4-operations/" class="md-tabs__link">
+          
+  
+  
+  Domain 4 · Operations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../custom-labs/ab730-agent-lab/" class="md-tabs__link">
+          
+  
+  
+  Custom Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+  참고
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI-200 Azure AI Cloud Developer" class="md-nav__button md-logo" aria-label="AI-200 Azure AI Cloud Developer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI-200 Azure AI Cloud Developer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/noisonnoiton/ai-200" title="저장소로 이동" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    소개
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    소개
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-204에서 AI-200으로
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-204에서 AI-200으로
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        한눈에 보는 변화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#az-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AZ-204에서 다루던 내용
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AZ-204에서 다루던 내용">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-compute-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure compute solutions 개발
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure storage 개발
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure security 구현
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        모니터링과 troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-third-party-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure 및 third-party service 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI-200에서 달라진 내용
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI-200에서 달라진 내용">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compute-container-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 범용 compute에서 container platform으로 중심 이동
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-storage-ai-data-vector-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 일반 storage에서 AI data와 vector search로 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-service-ai-workflow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. service 연결에서 AI workflow integration으로 구체화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-security-secretconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 인증 중심 security에서 secret·configuration 운영으로 초점 보강
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-application-insights-distributed-tracing-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Application Insights 중심에서 distributed tracing과 KQL로 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        무엇이 그대로 이어지는가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#az-204_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AZ-204 학습자의 전환 전략
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AZ-204 학습자의 전환 전략">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        그대로 가져갈 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        새로 보강할 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학습 순서
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        결론
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공식 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시험 정보
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/end-to-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-end architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 1 · Containers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 1 · Containers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain1-containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain1-containers/01-platforms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container hosting과 orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 2 · AI Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 2 · AI Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain2-ai-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain2-ai-data/01-vector-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector data와 RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 3 · Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 3 · Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain3-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain3-integration/01-events-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging, events, Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 4 · Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 4 · Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain4-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain4-operations/01-security-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security와 observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Custom Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custom-labs/ab730-agent-lab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AB-730 Agent Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custom-labs/ab730-agent-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [참고] Monitoring 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    참고
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    참고
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    용어집
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        한눈에 보는 변화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#az-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AZ-204에서 다루던 내용
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AZ-204에서 다루던 내용">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-compute-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure compute solutions 개발
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure storage 개발
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure security 구현
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        모니터링과 troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-third-party-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure 및 third-party service 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI-200에서 달라진 내용
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI-200에서 달라진 내용">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compute-container-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 범용 compute에서 container platform으로 중심 이동
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-storage-ai-data-vector-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 일반 storage에서 AI data와 vector search로 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-service-ai-workflow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. service 연결에서 AI workflow integration으로 구체화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-security-secretconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 인증 중심 security에서 secret·configuration 운영으로 초점 보강
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-application-insights-distributed-tracing-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Application Insights 중심에서 distributed tracing과 KQL로 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        무엇이 그대로 이어지는가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#az-204_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AZ-204 학습자의 전환 전략
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AZ-204 학습자의 전환 전략">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        그대로 가져갈 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        새로 보강할 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학습 순서
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        결론
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공식 자료
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+  <aside class="kakao-adfit-rail" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-oYnyqFed1jZhUtvA"
+      data-ad-width="160"
+      data-ad-height="600"></ins>
+  </aside>
+
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="az-204-ai-200">AZ-204에서 AI-200으로<a class="headerlink" href="#az-204-ai-200" title="Permanent link">&para;</a></h1>
+<p>Azure 개발자 자격증을 준비해 왔다면 AI-200은 완전히 새로운 시험이라기보다, 기존 AZ-204의 범용 Azure 개발 기반 위에 <strong>AI backend workload와 production 운영 역량을 전면에 배치한 후속 시험</strong>으로 보는 편이 정확합니다.</p>
+<p>AZ-204는 Azure에서 애플리케이션을 개발하는 전반적인 능력을 평가했습니다. AI-200은 그중에서도 컨테이너 기반 backend, AI data, vector search, messaging, serverless integration, secret 관리와 distributed observability를 하나의 AI cloud solution으로 연결하는 능력에 초점을 둡니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">자격증의 관계</p>
+<p>AZ-204는 2026년 7월 31일 23:59 Central Standard Time에 폐지되었습니다. AI-200은 AZ-204 자격증의 단순한 시험명 변경이 아니라, <strong>Azure AI Cloud Developer Associate</strong>라는 새로운 역할과 범위를 대상으로 하는 시험입니다.</p>
+</div>
+<h2 id="_1">한눈에 보는 변화<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>관점</th>
+<th>AZ-204</th>
+<th>AI-200</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자격증 역할</td>
+<td>Azure Developer Associate</td>
+<td>Azure AI Cloud Developer Associate</td>
+</tr>
+<tr>
+<td>중심 문제</td>
+<td>Azure 애플리케이션을 어떻게 개발하고 배포하는가?</td>
+<td>AI backend solution을 어떻게 개발하고 운영하는가?</td>
+</tr>
+<tr>
+<td>compute</td>
+<td>App Service, Functions, ACI, Container Apps, autoscaling, deployment slots</td>
+<td>ACR과 ACR Tasks, App Service, Container Apps revision, KEDA, AKS manifest와 troubleshooting</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Cosmos DB와 Blob Storage</td>
+<td>Cosmos DB for NoSQL, PostgreSQL + pgvector, Azure Managed Redis, vector indexing과 similarity search</td>
+</tr>
+<tr>
+<td>integration</td>
+<td>API Management, Event Grid, Event Hubs, Service Bus, Queue Storage</td>
+<td>Service Bus의 queue/topic/subscription과 dead-letter, Event Grid filter/retry, Functions trigger/binding</td>
+</tr>
+<tr>
+<td>security</td>
+<td>Entra ID, Microsoft Identity, SAS, Microsoft Graph, Managed Identity, Key Vault</td>
+<td>Key Vault secret rotation/retrieval, App Configuration, AI backend의 secret과 configuration 경계</td>
+</tr>
+<tr>
+<td>observability</td>
+<td>Application Insights의 metric, log, trace, availability test, alert</td>
+<td>OpenTelemetry 기반 distributed trace와 KQL을 이용한 log/metric 분석</td>
+</tr>
+<tr>
+<td>언어·개발 전제</td>
+<td>Azure SDK, CLI, PowerShell 등 범용 Azure 개발 경험</td>
+<td>Azure SDK와 third-party SDK, Python, vector database, containerized application 경험</td>
+</tr>
+</tbody>
+</table>
+<h2 id="az-204">AZ-204에서 다루던 내용<a class="headerlink" href="#az-204" title="Permanent link">&para;</a></h2>
+<p>폐지되기 전 AZ-204는 Azure Developer Associate 역할에 맞춰 애플리케이션 개발 lifecycle 전체를 다뤘습니다. 공식 skills measured는 다음 다섯 영역으로 구성되었습니다.</p>
+<h3 id="azure-compute-solutions">Azure compute solutions 개발<a class="headerlink" href="#azure-compute-solutions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Azure Container Registry에 container image를 게시하고 Azure Container Instances로 실행</li>
+<li>Azure App Service Web App 생성과 설정</li>
+<li>App Service의 진단, logging, TLS, API settings, service connections, autoscaling, deployment slots</li>
+<li>Azure Functions app, input/output binding, data operation·timer·webhook trigger</li>
+<li>Azure Container Apps를 이용한 애플리케이션 구현</li>
+</ul>
+<h3 id="azure-storage">Azure storage 개발<a class="headerlink" href="#azure-storage" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SDK를 이용한 Azure Cosmos DB container와 item 작업</li>
+<li>Cosmos DB consistency level과 change feed notification</li>
+<li>Blob Storage의 property와 metadata</li>
+<li>Blob data 작업과 storage policy, lifecycle management</li>
+</ul>
+<h3 id="azure-security">Azure security 구현<a class="headerlink" href="#azure-security" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microsoft Identity platform과 Microsoft Entra ID를 이용한 인증·인가</li>
+<li>Shared Access Signature(SAS)</li>
+<li>Microsoft Graph 연동</li>
+<li>Azure App Configuration과 Azure Key Vault</li>
+<li>Key, secret, certificate를 사용하는 코드와 Managed Identity</li>
+</ul>
+<h3 id="troubleshooting">모니터링과 troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Azure Monitor Application Insights의 metric, log, trace 분석</li>
+<li>Availability test와 alert</li>
+<li>애플리케이션 또는 서비스에 Application Insights instrumentation 적용</li>
+</ul>
+<h3 id="azure-third-party-service">Azure 및 third-party service 연결<a class="headerlink" href="#azure-third-party-service" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Azure API Management instance와 API 생성·문서화·access 설정·policy</li>
+<li>Azure Event Grid, Event Hubs, Service Bus, Queue Storage를 사용하는 event/message 기반 solution</li>
+</ul>
+<p>즉 AZ-204는 특정 AI workload보다 <strong>Azure에서 일반적인 애플리케이션을 구현하는 데 필요한 서비스 폭</strong>이 넓었습니다. Storage도 Cosmos DB와 Blob Storage 중심이었고, integration도 API와 여러 messaging service의 기본적인 연결이 중요한 축이었습니다.</p>
+<h2 id="ai-200">AI-200에서 달라진 내용<a class="headerlink" href="#ai-200" title="Permanent link">&para;</a></h2>
+<p>AI-200은 기존 Azure 개발 개념을 버리지 않습니다. 대신 AI workload가 실제로 동작하는 backend를 만들 때 필요한 병목과 운영 문제를 더 구체적으로 묻습니다.</p>
+<h3 id="1-compute-container-platform">1. 범용 compute에서 container platform으로 중심 이동<a class="headerlink" href="#1-compute-container-platform" title="Permanent link">&para;</a></h3>
+<p>AZ-204의 compute 영역은 App Service Web Apps, Functions, ACI, Container Apps와 배포 설정을 폭넓게 다뤘습니다. AI-200에서는 container를 단순히 실행하는 것보다 <strong>image lifecycle, orchestration, scale-out, 운영 진단</strong>이 중요해졌습니다.</p>
+<ul>
+<li>ACR에서 image를 build, store, version, manage</li>
+<li>ACR Tasks로 image build와 실행</li>
+<li>App Service에 container를 배포하면서 environment variable과 secret 연결</li>
+<li>Container Apps의 environment configuration과 revision management</li>
+<li>KEDA를 활용한 event-driven scaling</li>
+<li>AKS에 manifest로 application 배포</li>
+<li>AKS와 Container Apps의 log, event, end-to-end connectivity troubleshooting</li>
+</ul>
+<p>따라서 AZ-204의 <code>어디에 애플리케이션을 배포할 것인가</code>라는 선택 문제에서 AI-200은 <code>containerized AI backend를 어떻게 versioning하고, scaling하고, 고장 지점을 추적할 것인가</code>로 무게중심이 이동합니다.</p>
+<h3 id="2-storage-ai-data-vector-search">2. 일반 storage에서 AI data와 vector search로 확장<a class="headerlink" href="#2-storage-ai-data-vector-search" title="Permanent link">&para;</a></h3>
+<p>AI-200의 가장 큰 변화는 data 영역입니다. Cosmos DB를 단순한 document store로 사용하는 데서 끝나지 않고 embedding과 semantic retrieval을 다룹니다.</p>
+<ul>
+<li>Cosmos DB for NoSQL의 query, indexing policy, consistency level, RU 최적화</li>
+<li>embedding 저장과 vector similarity search</li>
+<li>change feed processor를 이용한 item 변경 처리</li>
+<li>PostgreSQL schema와 data type, index 설계</li>
+<li><code>pgvector</code>를 이용한 vector search와 RAG pattern</li>
+<li>metadata filter를 포함한 semantic retrieval</li>
+<li>vector workload에 맞춘 PostgreSQL compute, memory, storage, connection 최적화</li>
+<li>Azure Managed Redis의 cache, expiration, invalidation</li>
+<li>Redis vector index를 이용한 similarity search</li>
+</ul>
+<p>AZ-204의 Cosmos DB와 Blob Storage가 애플리케이션 data를 저장하는 방법에 초점을 뒀다면, AI-200은 <strong>embedding을 어디에 저장하고, 어떻게 검색하고, operational data와 어떻게 결합해 RAG backend를 만들 것인가</strong>를 묻습니다.</p>
+<h3 id="3-service-ai-workflow-integration">3. service 연결에서 AI workflow integration으로 구체화<a class="headerlink" href="#3-service-ai-workflow-integration" title="Permanent link">&para;</a></h3>
+<p>두 시험 모두 event와 message 기반 설계를 중요하게 보지만, AI-200은 장시간 실행되는 AI backend 작업과 비동기 처리를 더 명확하게 전제합니다.</p>
+<ul>
+<li>Service Bus queue로 backend 작업을 분리</li>
+<li>topic과 subscription으로 consumer를 분리</li>
+<li>dead-letter queue를 처리해 실패한 message를 복구·분석</li>
+<li>Event Grid의 custom event, filter, retry</li>
+<li>Azure Functions의 trigger와 binding으로 serverless API와 workflow 구현</li>
+<li>Functions app configuration과 deployment</li>
+</ul>
+<p>AI 요청은 모델 호출, data retrieval, 후처리처럼 시간이 오래 걸리거나 재시도가 필요한 단계로 나뉘기 쉽습니다. 그래서 AI-200에서는 단순히 service를 연결하는 것보다 <strong>message와 event를 구분하고, retry와 dead-letter를 포함한 reliable workflow를 설계하는 능력</strong>이 중요합니다.</p>
+<h3 id="4-security-secretconfiguration">4. 인증 중심 security에서 secret·configuration 운영으로 초점 보강<a class="headerlink" href="#4-security-secretconfiguration" title="Permanent link">&para;</a></h3>
+<p>AZ-204에는 Entra ID, Microsoft Identity, SAS, Microsoft Graph, Managed Identity 같은 identity 주제가 포함되어 있었습니다. AI-200의 공식 범위는 이보다 좁은 형태로 보이지만, AI backend를 운영하기 위한 secret과 configuration 관리가 분명해졌습니다.</p>
+<ul>
+<li>Key Vault에서 secret을 안전하게 저장·조회·rotation</li>
+<li>App Configuration에서 애플리케이션 configuration 관리</li>
+<li>container와 serverless 환경에 secret을 직접 넣지 않고 runtime에 주입</li>
+</ul>
+<p>AI service endpoint, database connection, signing key, embedding 관련 설정이 여러 component에 걸쳐 사용될 수 있으므로, AI-200에서는 <strong>secret 자체의 보호뿐 아니라 configuration이 compute와 어떻게 연결되는지</strong>까지 함께 봐야 합니다.</p>
+<h3 id="5-application-insights-distributed-tracing-kql">5. Application Insights 중심에서 distributed tracing과 KQL로 확장<a class="headerlink" href="#5-application-insights-distributed-tracing-kql" title="Permanent link">&para;</a></h3>
+<p>AZ-204도 Application Insights를 이용한 metric, log, trace, availability test와 alert를 포함했습니다. AI-200은 분산된 AI backend에서 하나의 요청이 여러 service를 통과한다는 점을 전제로 observability를 더 구체화합니다.</p>
+<ul>
+<li>OpenTelemetry SDK로 service 간 distributed trace 구현</li>
+<li>KQL로 log와 metric 분석</li>
+<li>container, Functions, messaging, data service 사이의 correlation 확인</li>
+<li>실패가 발생한 component와 지연 구간을 end-to-end로 좁히기</li>
+</ul>
+<p>AI-200에서 monitoring은 단순히 <code>Application Insights를 켜는 방법</code>이 아니라, <strong>하나의 AI request가 어떤 service와 data path를 통과했는지 증명하고 troubleshooting하는 방법</strong>에 가깝습니다.</p>
+<h2 id="_2">무엇이 그대로 이어지는가<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>AI-200을 준비한다고 해서 AZ-204 학습 내용을 모두 버릴 필요는 없습니다. 다음 기반은 그대로 유효합니다.</p>
+<ul>
+<li>Azure SDK client 생성과 authentication</li>
+<li>App Service와 Azure Functions의 기본 구조</li>
+<li>Container image와 registry 개념</li>
+<li>Cosmos DB의 partition, consistency, SDK 접근</li>
+<li>Managed Identity와 Key Vault</li>
+<li>Event Grid, Service Bus의 event/message 모델</li>
+<li>Application Insights와 Azure Monitor</li>
+<li>Azure CLI를 통한 resource와 deployment 관리</li>
+</ul>
+<p>다만 각 주제를 AI workload에 맞게 다시 연결해야 합니다. 예를 들어 Cosmos DB를 공부할 때 document CRUD만 복습하는 것으로는 부족합니다. embedding, vector search, RU와 indexing trade-off, metadata filter까지 이어서 이해해야 합니다.</p>
+<h2 id="az-204_1">AZ-204 학습자의 전환 전략<a class="headerlink" href="#az-204_1" title="Permanent link">&para;</a></h2>
+<h3 id="_3">그대로 가져갈 것<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Azure SDK와 resource model 이해</li>
+<li>App Service, Functions, container 배포 기초</li>
+<li>Cosmos DB, Key Vault, Managed Identity</li>
+<li>Event Grid와 Service Bus의 기본 semantics</li>
+<li>Application Insights와 Azure Monitor 사용 경험</li>
+</ol>
+<h3 id="_4">새로 보강할 것<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Python 기반 Azure SDK 실습</li>
+<li>ACR image lifecycle과 ACR Tasks</li>
+<li>Container Apps revision, KEDA, AKS manifest</li>
+<li>PostgreSQL와 <code>pgvector</code></li>
+<li>Cosmos DB vector search와 RAG retrieval</li>
+<li>Azure Managed Redis cache와 vector index</li>
+<li>Service Bus dead-letter와 retry 설계</li>
+<li>OpenTelemetry instrumentation</li>
+<li>KQL을 이용한 distributed troubleshooting</li>
+</ol>
+<h3 id="_5">학습 순서<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Container platform</strong>: ACR → App Service 또는 Container Apps → AKS 흐름을 직접 배포합니다.</li>
+<li><strong>AI data</strong>: embedding을 Cosmos DB 또는 PostgreSQL에 저장하고 vector similarity search를 실행합니다.</li>
+<li><strong>Integration</strong>: AI 작업을 Service Bus message로 분리하고 Event Grid 또는 Functions로 후속 처리를 연결합니다.</li>
+<li><strong>Security</strong>: Key Vault와 App Configuration을 사용해 secret과 runtime configuration을 외부화합니다.</li>
+<li><strong>Operations</strong>: OpenTelemetry trace와 KQL query로 하나의 요청을 끝까지 추적합니다.</li>
+<li><strong>Trade-off 복습</strong>: cache와 source of truth, message와 event, Container Apps와 AKS를 요구 사항에 따라 선택합니다.</li>
+</ol>
+<h2 id="_6">결론<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>AZ-204가 <strong>Azure application developer의 공통 기반</strong>을 평가했다면, AI-200은 그 기반을 사용해 <strong>운영 가능한 AI backend solution을 만드는 developer</strong>를 평가합니다.</p>
+<p>따라서 AZ-204에서 AI-200으로 이동할 때 핵심은 기존 내용을 처음부터 다시 공부하는 것이 아닙니다. 기존의 compute, storage, security, integration 지식을 다음 질문으로 재구성하는 것입니다.</p>
+<ul>
+<li>containerized AI workload는 어디에서 실행하고 어떻게 scale할 것인가?</li>
+<li>embedding과 operational data는 어떤 storage와 index로 관리할 것인가?</li>
+<li>장시간 AI 작업의 retry와 dead-letter를 어떻게 설계할 것인가?</li>
+<li>secret과 configuration을 각 component에 어떻게 안전하게 공급할 것인가?</li>
+<li>하나의 요청이 container, message, function, database를 거치는 동안 어디서 실패했는지 어떻게 증명할 것인가?</li>
+</ul>
+<p>이 질문에 코드와 Azure resource를 직접 연결해 답할 수 있다면, AZ-204의 기반을 AI-200의 production AI 개발 역량으로 전환할 수 있습니다.</p>
+<h2 id="_7">공식 자료<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-cloud-developer-associate/" target="_blank" rel="noopener">Microsoft Certified: Azure AI Cloud Developer Associate</a></li>
+<li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-200" target="_blank" rel="noopener">Study guide for Exam AI-200</a></li>
+<li><a href="https://learn.microsoft.com/en-us/training/courses/ai-200t00" target="_blank" rel="noopener">Course AI-200T00-A: Develop AI cloud solutions on Azure</a></li>
+<li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-204" target="_blank" rel="noopener">Study guide for retired Exam AZ-204</a></li>
+<li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/" target="_blank" rel="noopener">Microsoft Certified: Azure Developer Associate — retired</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+  
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="이전: Overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../exam/overview/" class="md-footer__link md-footer__link--next" aria-label="다음: 시험 정보">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                시험 정보
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="kakao-adfit-mobile" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-zHXbzhtivpd6MTA0"
+      data-ad-width="250"
+      data-ad-height="250"></ins>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "toc.follow", "header.autohide", "content.code.copy", "content.tooltips", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  <script src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+
+  </body>
+</html>

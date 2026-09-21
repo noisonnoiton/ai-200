@@ -1,0 +1,1613 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI-200 Developing AI Cloud Solutions on Azure 학습 자료">
+      
+      
+      
+        <link rel="canonical" href="https://noisonnoiton.github.io/ai-200/domain3-integration/01-events-functions/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../../domain4-operations/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Messaging, events, Functions - AI-200 Azure AI Cloud Developer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom-colors.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#messaging-events-functions" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="AI-200 Azure AI Cloud Developer" class="md-header__button md-logo" aria-label="AI-200 Azure AI Cloud Developer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-200 Azure AI Cloud Developer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Messaging, events, Functions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/noisonnoiton/ai-200" title="저장소로 이동" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  소개
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain1-containers/" class="md-tabs__link">
+          
+  
+  
+  Domain 1 · Containers
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain2-ai-data/" class="md-tabs__link">
+          
+  
+  
+  Domain 2 · AI Data
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Domain 3 · Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../domain4-operations/" class="md-tabs__link">
+          
+  
+  
+  Domain 4 · Operations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../custom-labs/ab730-agent-lab/" class="md-tabs__link">
+          
+  
+  
+  Custom Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+  참고
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI-200 Azure AI Cloud Developer" class="md-nav__button md-logo" aria-label="AI-200 Azure AI Cloud Developer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI-200 Azure AI Cloud Developer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/noisonnoiton/ai-200" title="저장소로 이동" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    소개
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    소개
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/az-204-to-ai-200/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-204에서 AI-200으로
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시험 정보
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/end-to-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-end architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 1 · Containers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 1 · Containers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain1-containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain1-containers/01-platforms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container hosting과 orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 2 · AI Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 2 · AI Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain2-ai-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain2-ai-data/01-vector-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector data와 RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 3 · Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 3 · Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging, events, Functions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging, events, Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#message-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message와 event 선택
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-bus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Bus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Grid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        짧은 실습
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain 4 · Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain 4 · Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain4-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../domain4-operations/01-security-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security와 observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Custom Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custom-labs/ab730-agent-lab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AB-730 Agent Lab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custom-labs/ab730-agent-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [참고] Monitoring 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    참고
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    참고
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    용어집
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#message-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message와 event 선택
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-bus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Bus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Grid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        짧은 실습
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+  <aside class="kakao-adfit-rail" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-oYnyqFed1jZhUtvA"
+      data-ad-width="160"
+      data-ad-height="600"></ins>
+  </aside>
+
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="messaging-events-functions">Messaging, events, Functions<a class="headerlink" href="#messaging-events-functions" title="Permanent link">&para;</a></h1>
+<h2 id="message-event">Message와 event 선택<a class="headerlink" href="#message-event" title="Permanent link">&para;</a></h2>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGRhdGEtZGlhZ3JhbS10eXBlPSJERVNDUklQVElPTiIgc3R5bGU9IndpZHRoOjU5OHB4O2hlaWdodDozODZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB3aWR0aD0iNTk4cHgiIGhlaWdodD0iMzg2cHgiIHZpZXdCb3g9IjAgMCA1OTggMzg2IiB6b29tQW5kUGFuPSJtYWduaWZ5IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyI+PD9wbGFudHVtbCAxLjIwMjYuOGJldGExPz48ZGVmcy8+PGcgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGxlbmd0aEFkanVzdD0ic3BhY2luZyI+PCEtLWNsdXN0ZXIgQ29tbWFuZCDCtyDsspjrpqztlbTslbwg7ZWgIOyekeyXhS0tPjxnIGNsYXNzPSJjbHVzdGVyIiBkYXRhLXF1YWxpZmllZC1uYW1lPSJDb21tYW5kIC4gLi4uLiAuIC4uIiBpZD0iZW50MDAwMiIgZGF0YS1zb3VyY2UtbGluZT0iMjIiPjxyZWN0IHg9IjciIHk9IjczLjMiIHdpZHRoPSIzOTciIGhlaWdodD0iOTMuNTkiIGZpbGw9IiNGOEZBRkMiIHN0eWxlPSJzdHJva2U6IzAwNzhENDtzdHJva2Utd2lkdGg6MTsiIHJ4PSI2IiByeT0iNiIvPjx0ZXh0IHg9IjEwOC43NjEiIHk9Ijg4LjI5NSIgZmlsbD0iIzBGMTcyQSIgZm9udC1zaXplPSIxNCIgdGV4dExlbmd0aD0iMTkzLjQ3OCIgZm9udC13ZWlnaHQ9IjcwMCI+Q29tbWFuZCDCtyDsspjrpqztlbTslbwg7ZWgIOyekeyXhTwvdGV4dD48L2c+PCEtLWNsdXN0ZXIgRXZlbnQgwrcg67Cc7IOd7ZWcIOyCrOyLpC0tPjxnIGNsYXNzPSJjbHVzdGVyIiBkYXRhLXF1YWxpZmllZC1uYW1lPSJFdmVudCAuIC4uLiAuLiIgaWQ9ImVudDAwMDUiIGRhdGEtc291cmNlLWxpbmU9IjI3Ij48cmVjdCB4PSI0MjgiIHk9IjY4LjMiIHdpZHRoPSIxNTYiIGhlaWdodD0iMTAzLjU5IiBmaWxsPSIjRjhGQUZDIiBzdHlsZT0ic3Ryb2tlOiMwMDc4RDQ7c3Ryb2tlLXdpZHRoOjE7IiByeD0iNiIgcnk9IjYiLz48dGV4dCB4PSI0NDEuNDA4IiB5PSI4My4yOTUiIGZpbGw9IiMwRjE3MkEiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjEyOS4xODQiIGZvbnQtd2VpZ2h0PSI3MDAiPkV2ZW50IMK3IOuwnOyDne2VnCDsgqzsi6Q8L3RleHQ+PC9nPjwhLS1lbnRpdHkgUXVldWUtLT48ZyBjbGFzcz0iZW50aXR5IiBkYXRhLXF1YWxpZmllZC1uYW1lPSJDb21tYW5kIC4gLi4uLiAuIC4uLlF1ZXVlIiBpZD0iZW50MDAwMyIgZGF0YS1zb3VyY2UtbGluZT0iMjMiPjxwYXRoIGQ9Ik0yNy45NiwxMDguMyBMMTc0LjA1LDEwOC4zIEMxNzkuMDUsMTA4LjMgMTc5LjA1LDEyOS41OTcgMTc5LjA1LDEyOS41OTcgQzE3OS4wNSwxMjkuNTk3IDE3OS4wNSwxNTAuODk0IDE3NC4wNSwxNTAuODk0IEwyNy45NiwxNTAuODk0IEMyMi45NiwxNTAuODk0IDIyLjk2LDEyOS41OTcgMjIuOTYsMTI5LjU5NyBDMjIuOTYsMTI5LjU5NyAyMi45NiwxMDguMyAyNy45NiwxMDguMyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiBmaWxsPSIjRTZGNEZGIi8+PHBhdGggZD0iTTE3NC4wNSwxMDguMyBDMTY5LjA1LDEwOC4zIDE2OS4wNSwxMjkuNTk3IDE2OS4wNSwxMjkuNTk3IEMxNjkuMDUsMTUwLjg5NCAxNzQuMDUsMTUwLjg5NCAxNzQuMDUsMTUwLjg5NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiBmaWxsPSJub25lIi8+PHRleHQgeD0iMjcuOTYiIHk9IjEyNi4yOTUiIGZpbGw9IiMwMDAiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjEzMC4yNzIiPlNlcnZpY2UgQnVzIHF1ZXVlPC90ZXh0Pjx0ZXh0IHg9IjI3Ljk2IiB5PSIxNDIuNTkyIiBmaWxsPSIjMDAwIiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMzYuMDkiPm9uZSBjb25zdW1lciBwYXRoPC90ZXh0PjwvZz48IS0tZW50aXR5IFRvcGljLS0+PGcgY2xhc3M9ImVudGl0eSIgZGF0YS1xdWFsaWZpZWQtbmFtZT0iQ29tbWFuZCAuIC4uLi4gLiAuLi5Ub3BpYyIgaWQ9ImVudDAwMDQiIGRhdGEtc291cmNlLWxpbmU9IjI0Ij48cGF0aCBkPSJNMjE4Ljg1LDEwOC4zIEwzODMuMTU4LDEwOC4zIEMzODguMTU4LDEwOC4zIDM4OC4xNTgsMTI5LjU5NyAzODguMTU4LDEyOS41OTcgQzM4OC4xNTgsMTI5LjU5NyAzODguMTU4LDE1MC44OTQgMzgzLjE1OCwxNTAuODk0IEwyMTguODUsMTUwLjg5NCBDMjEzLjg1LDE1MC44OTQgMjEzLjg1LDEyOS41OTcgMjEzLjg1LDEyOS41OTcgQzIxMy44NSwxMjkuNTk3IDIxMy44NSwxMDguMyAyMTguODUsMTA4LjMiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgZmlsbD0iI0RGRjdGNCIvPjxwYXRoIGQ9Ik0zODMuMTU4LDEwOC4zIEMzNzguMTU4LDEwOC4zIDM3OC4xNTgsMTI5LjU5NyAzNzguMTU4LDEyOS41OTcgQzM3OC4xNTgsMTUwLjg5NCAzODMuMTU4LDE1MC44OTQgMzgzLjE1OCwxNTAuODk0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIGZpbGw9Im5vbmUiLz48dGV4dCB4PSIyMTguODUiIHk9IjEyNi4yOTUiIGZpbGw9IiMwMDAiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjEyMC45NDEiPlNlcnZpY2UgQnVzIHRvcGljPC90ZXh0Pjx0ZXh0IHg9IjIxOC44NSIgeT0iMTQyLjU5MiIgZmlsbD0iIzAwMCIgZm9udC1zaXplPSIxNCIgdGV4dExlbmd0aD0iMTU0LjMwOCI+bXVsdGlwbGUgc3Vic2NyaXB0aW9uczwvdGV4dD48L2c+PCEtLWVudGl0eSBHcmlkLS0+PGcgY2xhc3M9ImVudGl0eSIgZGF0YS1xdWFsaWZpZWQtbmFtZT0iRXZlbnQgLiAuLi4gLi4uR3JpZCIgaWQ9ImVudDAwMDYiIGRhdGEtc291cmNlLWxpbmU9IjI4Ij48cmVjdCB4PSI0NDQuMjIiIHk9IjEwMy4zIiB3aWR0aD0iMTIzLjU1OCIgaGVpZ2h0PSI1Mi41OTQiIGZpbGw9IiNFOEYwRkUiIHN0eWxlPSJzdHJva2U6IzAwNzhENDtzdHJva2Utd2lkdGg6MC41OyIgcng9IjYiIHJ5PSI2Ii8+PHRleHQgeD0iNDU0LjIyIiB5PSIxMjYuMjk1IiBmaWxsPSIjMEYxNzJBIiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSI3My45MzgiPkV2ZW50IEdyaWQ8L3RleHQ+PHRleHQgeD0iNDU0LjIyIiB5PSIxNDIuNTkyIiBmaWxsPSIjMEYxNzJBIiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMDMuNTU4Ij5maWx0ZXIgKyBmYW4tb3V0PC90ZXh0PjwvZz48IS0tZW50aXR5IFN0YXJ0LS0+PGcgY2xhc3M9ImVudGl0eSIgZGF0YS1xdWFsaWZpZWQtbmFtZT0iU3RhcnQiIGlkPSJlbnQwMDAxIiBkYXRhLXNvdXJjZS1saW5lPSIyMCI+PHJlY3QgeD0iMjI5LjU5IiB5PSI3IiB3aWR0aD0iMTQyLjgyMSIgaGVpZ2h0PSIzNi4yOTciIGZpbGw9IiNGRkY0Q0UiIHN0eWxlPSJzdHJva2U6IzAwNzhENDtzdHJva2Utd2lkdGg6MC41OyIgcng9IjYiIHJ5PSI2Ii8+PHRleHQgeD0iMjM5LjU5IiB5PSIyOS45OTUiIGZpbGw9IiMwRjE3MkEiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjEyMi44MjEiPkludGVncmF0aW9uIGludGVudDwvdGV4dD48L2c+PCEtLWVudGl0eSBGdW5jdGlvbi0tPjxnIGNsYXNzPSJlbnRpdHkiIGRhdGEtcXVhbGlmaWVkLW5hbWU9IkZ1bmN0aW9uIiBpZD0iZW50MDAwNyIgZGF0YS1zb3VyY2UtbGluZT0iMzEiPjxyZWN0IHg9IjIzMC45NSIgeT0iMjE1Ljg5IiB3aWR0aD0iMTQwLjA5NCIgaGVpZ2h0PSI1Mi41OTQiIGZpbGw9IiNGM0U4RkYiIHN0eWxlPSJzdHJva2U6IzAwNzhENDtzdHJva2Utd2lkdGg6MC41OyIgcng9IjYiIHJ5PSI2Ii8+PHRleHQgeD0iMjQwLjk1IiB5PSIyMzguODg1IiBmaWxsPSIjMEYxNzJBIiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMTIuMjI2Ij5BenVyZSBGdW5jdGlvbnM8L3RleHQ+PHRleHQgeD0iMjQwLjk1IiB5PSIyNTUuMTgyIiBmaWxsPSIjMEYxNzJBIiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMjAuMDk0Ij50cmlnZ2VyICsgYmluZGluZzwvdGV4dD48L2c+PCEtLWVudGl0eSBETFEtLT48ZyBjbGFzcz0iZW50aXR5IiBkYXRhLXF1YWxpZmllZC1uYW1lPSJETFEiIGlkPSJlbnQwMDA4IiBkYXRhLXNvdXJjZS1saW5lPSIzMiI+PHBhdGggZD0iTTIzOC4zMSwzMjguNDkgTDM2My42OTQsMzI4LjQ5IEMzNjguNjk0LDMyOC40OSAzNjguNjk0LDM0OS43ODcgMzY4LjY5NCwzNDkuNzg3IEMzNjguNjk0LDM0OS43ODcgMzY4LjY5NCwzNzEuMDg0IDM2My42OTQsMzcxLjA4NCBMMjM4LjMxLDM3MS4wODQgQzIzMy4zMSwzNzEuMDg0IDIzMy4zMSwzNDkuNzg3IDIzMy4zMSwzNDkuNzg3IEMyMzMuMzEsMzQ5Ljc4NyAyMzMuMzEsMzI4LjQ5IDIzOC4zMSwzMjguNDkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgZmlsbD0iI0ZERTdFOSIvPjxwYXRoIGQ9Ik0zNjMuNjk0LDMyOC40OSBDMzU4LjY5NCwzMjguNDkgMzU4LjY5NCwzNDkuNzg3IDM1OC42OTQsMzQ5Ljc4NyBDMzU4LjY5NCwzNzEuMDg0IDM2My42OTQsMzcxLjA4NCAzNjMuNjk0LDM3MS4wODQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgZmlsbD0ibm9uZSIvPjx0ZXh0IHg9IjIzOC4zMSIgeT0iMzQ2LjQ4NSIgZmlsbD0iIzAwMCIgZm9udC1zaXplPSIxNCIgdGV4dExlbmd0aD0iNzkuNzYyIj5EZWFkLWxldHRlcjwvdGV4dD48dGV4dCB4PSIyMzguMzEiIHk9IjM2Mi43ODIiIGZpbGw9IiMwMDAiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjExNS4zODQiPmluc3BlY3QgKyByZXBsYXk8L3RleHQ+PC9nPjwhLS1saW5rIFN0YXJ0IHRvIFF1ZXVlLS0+PGcgY2xhc3M9ImxpbmsiIGRhdGEtZW50aXR5LTE9ImVudDAwMDEiIGRhdGEtZW50aXR5LTI9ImVudDAwMDMiIGlkPSJsbms5IiBkYXRhLXNvdXJjZS1saW5lPSIzNCIgZGF0YS1saW5rLXR5cGU9ImRlcGVuZGVuY3kiPjxwYXRoIGQ9Ik0yMjkuMzYsMjYuMDggQzE3MS45NywyNi4wOCAxMDEsMjYuMDggMTAxLDI2LjA4IEMxMDEsMjYuMDggMTAxLDcyLjU0IDEwMSwxMDIuOSIgc3R5bGU9InN0cm9rZTojNjQ3NDhCO3N0cm9rZS13aWR0aDoxLjU7IiBmaWxsPSJub25lIiBpZD0iU3RhcnQtdG8tUXVldWUiLz48cG9seWdvbiBwb2ludHM9IjEwMSwxMDcuOSwxMDUsOTguOSwxMDEsMTAyLjksOTcsOTguOSwxMDEsMTA3LjkiIGZpbGw9IiM2NDc0OEIiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiLz48dGV4dCB4PSI0MC4yNyIgeT0iMjIuMDc1IiBmaWxsPSIjNDc1NTY5IiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSI4My45NzMiPm9uZSBoYW5kbGVyPC90ZXh0PjwvZz48IS0tbGluayBTdGFydCB0byBUb3BpYy0tPjxnIGNsYXNzPSJsaW5rIiBkYXRhLWVudGl0eS0xPSJlbnQwMDAxIiBkYXRhLWVudGl0eS0yPSJlbnQwMDA0IiBpZD0ibG5rMTAiIGRhdGEtc291cmNlLWxpbmU9IjM1IiBkYXRhLWxpbmstdHlwZT0iZGVwZW5kZW5jeSI+PHBhdGggZD0iTTMwMSw0My4zNCBDMzAxLDYxLjM0IDMwMSw4My45IDMwMSwxMDMiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41OyIgZmlsbD0ibm9uZSIgaWQ9IlN0YXJ0LXRvLVRvcGljIi8+PHBvbHlnb24gcG9pbnRzPSIzMDEsMTA4LDMwNSw5OSwzMDEsMTAzLDI5Nyw5OSwzMDEsMTA4IiBmaWxsPSIjNjQ3NDhCIiBzdHlsZT0ic3Ryb2tlOiM2NDc0OEI7c3Ryb2tlLXdpZHRoOjEuNTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6MTA7Ii8+PHRleHQgeD0iMTk2IiB5PSI3MS42NjUiIGZpbGw9IiM0NzU1NjkiIGZvbnQtc2l6ZT0iMTQiIHRleHRMZW5ndGg9IjEwNC41OSI+bWFueSBoYW5kbGVyczwvdGV4dD48L2c+PCEtLWxpbmsgU3RhcnQgdG8gR3JpZC0tPjxnIGNsYXNzPSJsaW5rIiBkYXRhLWVudGl0eS0xPSJlbnQwMDAxIiBkYXRhLWVudGl0eS0yPSJlbnQwMDA2IiBpZD0ibG5rMTEiIGRhdGEtc291cmNlLWxpbmU9IjM2IiBkYXRhLWxpbmstdHlwZT0iZGVwZW5kZW5jeSI+PHBhdGggZD0iTTM3Mi43LDI2LjA4IEM0MzEuODIsMjYuMDggNTA2LDI2LjA4IDUwNiwyNi4wOCBDNTA2LDI2LjA4IDUwNiw2Ny4yNyA1MDYsOTcuOTQiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41OyIgZmlsbD0ibm9uZSIgaWQ9IlN0YXJ0LXRvLUdyaWQiLz48cG9seWdvbiBwb2ludHM9IjUwNiwxMDIuOTQsNTEwLDkzLjk0LDUwNiw5Ny45NCw1MDIsOTMuOTQsNTA2LDEwMi45NCIgZmlsbD0iIzY0NzQ4QiIgc3R5bGU9InN0cm9rZTojNjQ3NDhCO3N0cm9rZS13aWR0aDoxLjU7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjEwOyIvPjx0ZXh0IHg9IjM3Ni43OCIgeT0iMjIuMDc1IiBmaWxsPSIjNDc1NTY5IiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMDAuMzI0Ij5zdGF0ZSBjaGFuZ2VkPC90ZXh0PjwvZz48IS0tbGluayBRdWV1ZSB0byBGdW5jdGlvbi0tPjxnIGNsYXNzPSJsaW5rIiBkYXRhLWVudGl0eS0xPSJlbnQwMDAzIiBkYXRhLWVudGl0eS0yPSJlbnQwMDA3IiBpZD0ibG5rMTIiIGRhdGEtc291cmNlLWxpbmU9IjM3IiBkYXRhLWxpbmstdHlwZT0iZGVwZW5kZW5jeSI+PHBhdGggZD0iTTEwMSwxNTEuMjEgQzEwMSwxODQuMTMgMTAxLDI0My4wOCAxMDEsMjQzLjA4IEMxMDEsMjQzLjA4IDE2Ny45MSwyNDMuMDggMjI1LjQ5LDI0My4wOCIgc3R5bGU9InN0cm9rZTojNjQ3NDhCO3N0cm9rZS13aWR0aDoxLjU7IiBmaWxsPSJub25lIiBpZD0iUXVldWUtdG8tRnVuY3Rpb24iLz48cG9seWdvbiBwb2ludHM9IjIzMC40OSwyNDMuMDgsMjIxLjQ5LDIzOS4wOCwyMjUuNDksMjQzLjA4LDIyMS40OSwyNDcuMDgsMjMwLjQ5LDI0My4wOCIgZmlsbD0iIzY0NzQ4QiIgc3R5bGU9InN0cm9rZTojNjQ3NDhCO3N0cm9rZS13aWR0aDoxLjU7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjEwOyIvPjwvZz48IS0tbGluayBUb3BpYyB0byBGdW5jdGlvbi0tPjxnIGNsYXNzPSJsaW5rIiBkYXRhLWVudGl0eS0xPSJlbnQwMDA0IiBkYXRhLWVudGl0eS0yPSJlbnQwMDA3IiBpZD0ibG5rMTMiIGRhdGEtc291cmNlLWxpbmU9IjM4IiBkYXRhLWxpbmstdHlwZT0iZGVwZW5kZW5jeSI+PHBhdGggZD0iTTMwMSwxNTEuMyBDMzAxLDE2OS43MSAzMDEsMTkxLjE2IDMwMSwyMTAuNzkiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41OyIgZmlsbD0ibm9uZSIgaWQ9IlRvcGljLXRvLUZ1bmN0aW9uIi8+PHBvbHlnb24gcG9pbnRzPSIzMDEsMjE1Ljc5LDMwNSwyMDYuNzksMzAxLDIxMC43OSwyOTcsMjA2Ljc5LDMwMSwyMTUuNzkiIGZpbGw9IiM2NDc0OEIiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiLz48L2c+PCEtLWxpbmsgR3JpZCB0byBGdW5jdGlvbi0tPjxnIGNsYXNzPSJsaW5rIiBkYXRhLWVudGl0eS0xPSJlbnQwMDA2IiBkYXRhLWVudGl0eS0yPSJlbnQwMDA3IiBpZD0ibG5rMTQiIGRhdGEtc291cmNlLWxpbmU9IjM5IiBkYXRhLWxpbmstdHlwZT0iZGVwZW5kZW5jeSI+PHBhdGggZD0iTTUwNiwxNTYuMiBDNTA2LDE4OS43NSA1MDYsMjQzLjA4IDUwNiwyNDMuMDggQzUwNiwyNDMuMDggNDM1LjYxLDI0My4wOCAzNzYuMjYsMjQzLjA4IiBzdHlsZT0ic3Ryb2tlOiM2NDc0OEI7c3Ryb2tlLXdpZHRoOjEuNTsiIGZpbGw9Im5vbmUiIGlkPSJHcmlkLXRvLUZ1bmN0aW9uIi8+PHBvbHlnb24gcG9pbnRzPSIzNzEuMjYsMjQzLjA4LDM4MC4yNiwyNDcuMDgsMzc2LjI2LDI0My4wOCwzODAuMjYsMjM5LjA4LDM3MS4yNiwyNDMuMDgiIGZpbGw9IiM2NDc0OEIiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiLz48L2c+PCEtLWxpbmsgRnVuY3Rpb24gdG8gRExRLS0+PGcgY2xhc3M9ImxpbmsiIGRhdGEtZW50aXR5LTE9ImVudDAwMDciIGRhdGEtZW50aXR5LTI9ImVudDAwMDgiIGlkPSJsbmsxNSIgZGF0YS1zb3VyY2UtbGluZT0iNDAiIGRhdGEtbGluay10eXBlPSJkZXBlbmRlbmN5Ij48cGF0aCBkPSJNMzAxLDI2OC43OSBDMzAxLDI4Ny4wOCAzMDEsMzA2LjA3IDMwMSwzMjMuMTkiIHN0eWxlPSJzdHJva2U6IzY0NzQ4QjtzdHJva2Utd2lkdGg6MS41OyIgZmlsbD0ibm9uZSIgaWQ9IkZ1bmN0aW9uLXRvLURMUSIvPjxwb2x5Z29uIHBvaW50cz0iMzAxLDMyOC4xOSwzMDUsMzE5LjE5LDMwMSwzMjMuMTksMjk3LDMxOS4xOSwzMDEsMzI4LjE5IiBmaWxsPSIjNjQ3NDhCIiBzdHlsZT0ic3Ryb2tlOiM2NDc0OEI7c3Ryb2tlLXdpZHRoOjEuNTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6MTA7Ii8+PHRleHQgeD0iMTc3IiB5PSIyOTQuNDg1IiBmaWxsPSIjNDc1NTY5IiBmb250LXNpemU9IjE0IiB0ZXh0TGVuZ3RoPSIxMjMuMzY4Ij5yZXRyaWVzIGV4aGF1c3RlZDwvdGV4dD48L2c+PD9wbGFudHVtbC1zcmMgUkw4elp6RDA0RXR6QXFQOVlPQUlZdEY5ZksxQU9ZejJHYVlkTjliY3B2eE9nell4UGRUekhteEhXQVllQTI4ZTNhSTFnQXYwMjhjNlloenBwZHpXeDdwVzJ6VWp2aHJ2eS1SRGNlTUc2VFN5WEgzZEY0eWlLejgtdW9kMmI0bEpjZzhNU3lWU0h2Z0FBdUlFTW1Fcm9jS09BMnJIRy1VZTFmWU9YLWZJbzBaY0YzNU9HbjhYcUl1cDFBTGpoNmgwSTZqckVMNjlxajB5VGxsa083bThiWHdzMUJWVnduc1Y3MUJFT1g0aTkxZTNkT1V6NmZabk9DNFpkRGZiV2cwbmk1bjYyVnZGVzlWRU1FYUd6TlJBUEVwcl84dkpjemxqa2ZyVXBuYUpGd2dNdHpSUFc4dE9uN2JMcHNPdHZyMnJ0VXVGRkJVa3NjUVRfajY4a2ZyX0pPcWRxY0Fha0hMQVdnMnRqMHRXMWdRTVFxaTM2TkNkbGtGaWQzU2NBYXN2M0U3RkJvWC1WQnB6VGhEVV9Jbk1sczZ6LVdCNXZfVjVYeFNEQ2w4eW52cDhURUdCNEkyQ1NtRExRSVFMSDBZS0Q3YkFqeW91WlFqZmZuTV93SHlwYng3eGtndEFIMzJKQU5xSGFQNWphdi1SRzhraWo2cWdZUkVJMEtzRmlKdnBvbnR0YmxxQk1nZXFWRmx6a2RacFFSc3dYa0JySlY3a1EtY3FiaUk2enJZQlMyUmQ4aDVheTA3ekF6YkktSVFKNFlBSjB6UGNfYTZBZXdqUzh4MVMxZk1aY1JIUUg1NmJTMnZhSTMtcUtqV0hBRFdrd1VuTnpQMjdoR0dqcFBuOThLcjZvaklnQ0tsdWlraHFkZnZJYS1WdF9IRjdzSG9kck5ncTNNdThQUW1udElMMU5LQ3RjR28xQmhSU21RUTZMbWlEbUxYa3dJZjRZMzFxRGY4Ymw3RmhSN0prYkFoTUV2TnpSY01yajNpYV9uRzM2aTBOQ1MtRG5WMGw/PjwvZz48L3N2Zz4=" class="uml" alt="uml diagram" title="" /></p>
+<h2 id="service-bus">Service Bus<a class="headerlink" href="#service-bus" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Queue는 sender와 receiver를 시간적으로 분리합니다.</li>
+<li>Topic과 subscription은 동일 message를 여러 workflow에 전달합니다.</li>
+<li>Retry가 끝난 poison message는 dead-letter queue에서 원인과 metadata를 조사합니다.</li>
+<li>Duplicate 처리 가능성을 고려해 consumer를 idempotent하게 설계합니다.</li>
+</ul>
+<h2 id="event-grid">Event Grid<a class="headerlink" href="#event-grid" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Event는 “무언가 발생했다”는 사실을 전달합니다.</li>
+<li>Filter로 event type이나 subject에 따라 subscriber를 제한합니다.</li>
+<li>Retry와 dead-letter destination을 설계해 delivery failure를 관찰합니다.</li>
+</ul>
+<h2 id="azure-functions">Azure Functions<a class="headerlink" href="#azure-functions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Trigger는 function 실행 원인이고 binding은 input/output service 연결을 단순화합니다.</li>
+<li>HTTP trigger는 가벼운 serverless API에, queue/event trigger는 background handler에 적합합니다.</li>
+<li>Timeout, concurrency, retry, hosting plan을 workload 특성에 맞게 설정합니다.</li>
+<li>Function code가 실패해도 message loss나 중복 side effect가 없도록 처리합니다.</li>
+</ul>
+<h2 id="_1">짧은 실습<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>PDF upload 뒤 extraction, embedding, indexing을 수행하는 pipeline을 설계합니다. Upload notification은 Event Grid로 시작할 수 있지만, 실제 처리 단계는 Service Bus message로 durable하게 분리하는 방안을 검토합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+  
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="이전: Overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../domain4-operations/" class="md-footer__link md-footer__link--next" aria-label="다음: Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="kakao-adfit-mobile" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-zHXbzhtivpd6MTA0"
+      data-ad-width="250"
+      data-ad-height="250"></ins>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "navigation.footer", "toc.follow", "header.autohide", "content.code.copy", "content.tooltips", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  <script src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+
+  </body>
+</html>
