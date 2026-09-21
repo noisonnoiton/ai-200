@@ -54,6 +54,21 @@
   }
 }
 
+/* Mobile-only 250×250 AdFit unit, placed after the Material footer. */
+.kakao-adfit-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .kakao-adfit-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem auto;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--md-default-fg-color--lighter);
+  }
+}
+
 /* A desktop-only AdFit rail to the right of the table of contents. */
 .kakao-adfit-rail {
   display: none;

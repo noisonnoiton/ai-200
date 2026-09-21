@@ -35,6 +35,16 @@
   </aside>
 {% endblock %}
 
+{% block footer %}
+  {{ super() }}
+  <div class="kakao-adfit-mobile" aria-label="광고">
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit="DAN-zHXbzhtivpd6MTA0"
+      data-ad-width="250"
+      data-ad-height="250"></ins>
+  </div>
+{% endblock %}
+
 {% block scripts %}
   {{ super() }}
   <script src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
